@@ -21,7 +21,7 @@ const nextISSTimesForMyLocation = function() {
   return fetchMyIP()
     .then(fetchCoordsByIP)
     .then(fetchISSFlyOverTimes)
-    .then(body => console.log(JSON.parse(body)))
+    // .then(body => console.log(JSON.parse(body)))
 }
 
 module.exports = { nextISSTimesForMyLocation };
