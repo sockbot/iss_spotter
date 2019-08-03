@@ -1,16 +1,22 @@
 const request = require('request-promise-native');
 
 const fetchMyIP = function() {
-  return request("https://api.ipify.org/?format=json");
+  let options = { 
+    uri: "https://api.ipify.org/?format=json",
+    resolveWithFullResponse:  true
+  }
+  return request(options);
 }
 
-const fetchCoordsByIP = function(body) {
-  const latLong = '{ "data": { "latitude": 49.26200, "longitude": -123.09230 } }';
-  const ip = JSON.parse(body).ip;
-  // return request("https://ipvigilante.com/" + ip)
-  return new Promise((resolve, reject) => {
-    resolve(latLong);
-  })
+const fetchCoordsByIP = function(req) {
+  console.log(req.body);
+  const ip = JSON.parse(req.body).ip;
+  return request("https://ipvigilante.com/" + ip)
+  // return request("https://ipvigilante.com/" + '192.168.1.1');
+  // const latLong = '{ "data": { "latitude": 49.26200, "longitude": -123.09230 } }';
+  // return new Promise((resolve, reject) => {
+  //   resolve(latLong);
+  // })
 };
 
 const fetchISSFlyOverTimes = function(body) {
@@ -25,9 +31,12 @@ const fetchISSFlyOverTimes = function(body) {
 
 const nextISSTimesForMyLocation = function() {
   return fetchMyIP()
-    .then(fetchCoordsByIP)
-    .then(fetchISSFlyOverTimes)
-    // .then(body => console.log(JSON.parse(body)))
+  .then(fetchCoordsByIP)
+  .then(fetchISSFlyOverTimes)
+  // .catch((err) => {
+  //   console.log('Error:', err.statusCode)
+  // })
+  // .then(body => console.log(JSON.parse(body)))
 }
 
 module.exports = { nextISSTimesForMyLocation };

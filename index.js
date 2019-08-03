@@ -17,13 +17,11 @@ fetchCoordsByIP("162.245.144.188", (error, data) => {
   }
 });
 
-const latLong = { latitude: '49.26200', longitude: '-123.09230' }
-
+3
 fetchISSFlyOverTimes(latLong, (error, data) => {
   console.log(error);
   console.log(data);
 })
 
 // const printPassTimes = fucntion(passTimes) {
-
-}
+// }
