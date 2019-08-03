@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 
 const fetchMyIP = function() {
-  let options = { 
+  const options = { 
     uri: "https://api.ipify.org/?format=json",
     resolveWithFullResponse:  true
   }
@@ -9,10 +9,15 @@ const fetchMyIP = function() {
 }
 
 const fetchCoordsByIP = function(req) {
-  console.log(req.body);
   const ip = JSON.parse(req.body).ip;
+  // const ip = '192.168.1.1'
+  console.log(ip)
+  const options = { 
+    uri: "https://ipvigilante.com/" + ip,
+    resolveWithFullResponse:  true
+  }
+  // console.log(req.body);
   return request("https://ipvigilante.com/" + ip)
-  // return request("https://ipvigilante.com/" + '192.168.1.1');
   // const latLong = '{ "data": { "latitude": 49.26200, "longitude": -123.09230 } }';
   // return new Promise((resolve, reject) => {
   //   resolve(latLong);
@@ -20,6 +25,7 @@ const fetchCoordsByIP = function(req) {
 };
 
 const fetchISSFlyOverTimes = function(body) {
+  console.log(body)
   // console.log(typeof body)
   let coords = {}
   const jsonString = JSON.parse(body);
