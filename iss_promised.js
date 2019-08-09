@@ -9,8 +9,8 @@ const fetchMyIP = function() {
 }
 
 const fetchCoordsByIP = function(req) {
-  // const ip = JSON.parse(req.body).ip;
-  const ip = '192.168.1.1'
+  const ip = JSON.parse(req.body).ip;
+  // const ip = '192.168.1.1'
   console.log(ip)
   const options = { 
     uri: "https://ipvigilante.com/" + ip,
@@ -25,7 +25,7 @@ const fetchCoordsByIP = function(req) {
 };
 
 const fetchISSFlyOverTimes = function(body) {
-  console.log(body)
+  // console.log(body)
   // console.log(typeof body)
   let coords = {}
   const jsonString = JSON.parse(body);
